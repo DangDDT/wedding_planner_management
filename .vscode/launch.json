@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "wedding_planner_management (dev)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_development.dart",
+            "args": [
+                "--flavor",
+                "development",
+                "target",
+                "lib/main_development.dart"
+            ]
+        },
+        {
+            "name": "wedding_planner_management (staging)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_staging.dart",
+            "args": [
+                "--flavor",
+                "production",
+                "target",
+                "lib/main_staging.dart"
+            ]
+        },
+        {
+            "name": "wedding_planner_management (production)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_production.dart",
+            "args": [
+                "--flavor",
+                "production",
+                "target",
+                "lib/main_production.dart"
+            ]
+        }
+         
+    ]
+}
