@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/core.dart';
+import '../../../core/constants/ui_constant.dart';
 import 'base_icon_button.dart';
 
 class BaseAppBar extends StatelessWidget {

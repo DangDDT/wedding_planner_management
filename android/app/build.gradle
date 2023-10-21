@@ -74,23 +74,26 @@ android {
         versionName flutterVersionName
     }
 
-    signingConfigs {
-        // if (System.getenv("ANDROID_KEYSTORE_PATH")) {
-        //     release {
-        //         storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
-        //         keyAlias System.getenv("ANDROID_KEYSTORE_ALIAS")
-        //         keyPassword System.getenv("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-        //         storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-        //     }
-        // } else {
-        //     release {
-        //         keyAlias keystoreProperties['keyAlias']
-        //         keyPassword keystoreProperties['keyPassword']
-        //         storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-        //         storePassword keystoreProperties['storePassword']
-        //     }
-        // }
-    }
+    // signingConfigs {
+    //     // if (System.getenv("ANDROID_KEYSTORE_PATH")) {
+    //     //     release {
+    //     //         storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
+    //     //         keyAlias System.getenv("ANDROID_KEYSTORE_ALIAS")
+    //     //         keyPassword System.getenv("ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+    //     //         storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+    //     //     }
+    //     // } else {
+    //     //     release {
+    //     //         keyAlias keystoreProperties['keyAlias']
+    //     //         keyPassword keystoreProperties['keyPassword']
+    //     //         storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+    //     //         storePassword keystoreProperties['storePassword']
+    //     //     }
+    //     // }
+    //     release {
+    //         signingConfig signingConfigs.debug
+    //     }
+    // }
 
     flavorDimensions "default"
 
@@ -109,7 +112,7 @@ android {
 
         development {
             dimension "default"
-             manifestPlaceholders = ['appName': "[DEV] Wedding Planner Management"]
+            manifestPlaceholders = ['appName': "[DEV] Wedding Planner Management"]
             applicationIdSuffix ""
         }
     }
@@ -127,6 +130,12 @@ android {
         debug {
             signingConfig signingConfigs.debug
         }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+        }
     }
 }
 
@@ -139,4 +148,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
 }

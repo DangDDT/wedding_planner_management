@@ -4,16 +4,15 @@ import 'package:talker/talker.dart';
 import '../../core.dart';
 
 class Logger {
-  // static final TalkerLoggerSettings _settings = TalkerLoggerSettings(
-  //   colors: {
-  //     LogLevel.info: AnsiPen()..white(),
-  //     LogLevel.warning: AnsiPen()..yellow(),
-  //     LogLevel.error: AnsiPen()..red(),
-  //     LogLevel.critical: AnsiPen()..rgb(r: 255, g: 165, b: 0),
-  //   },
-  // );
-
-  static final _talker = Talker();
+  static final _talker = Talker(
+    logger: TalkerLogger(
+      settings: TalkerLoggerSettings(enableColors: true, colors: {
+        LogLevel.critical: AnsiPen()..red(),
+        LogLevel.error: AnsiPen()..magenta(),
+        LogLevel.info: AnsiPen()..cyan(),
+      }),
+    ),
+  );
 
   static const String _tag = '${AppCore.tag}_Logger';
   static String getLogMessage(String message, String code) {

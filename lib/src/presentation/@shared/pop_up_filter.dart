@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/core.dart';
-
 class CommonPopUpFilter<E> extends StatelessWidget {
   final String? name;
   final E? currentSelection;
@@ -29,9 +27,7 @@ class CommonPopUpFilter<E> extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: theme.disabledColor.withOpacity(.05),
-          borderRadius: BorderRadius.circular(
-            kDefaultBorderRadius,
-          ),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: ListTile(
           title: Text(

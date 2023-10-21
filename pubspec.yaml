@@ -21,8 +21,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.0.6 <4.0.0"
 
-isar_version: &isar_version 3.1.0+1
-
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -45,14 +43,30 @@ dependencies:
   path_provider: ^2.1.0
   talker: ^3.1.1
   talker_dio_logger: ^2.3.0
-  isar: *isar_version
-  isar_flutter_libs: *isar_version
+  isar: 3.1.0+1
+  isar_flutter_libs: 3.1.0+1
+  google_fonts: ^5.1.0
+  loader_overlay: ^2.3.2
+  flutter_spinkit: ^5.2.0
+  flutter_local_notifications: ^16.1.0
+  flutter_native_timezone: ^2.0.0
+  timezone: ^0.9.2
+  firebase_auth: ^4.11.1
+  core_picker:
+    path: ../picker_package
   user_module:
     path: ../user_module
 
     # git:
     #   url: https://github.com/DangDDT/user_module.git
     #   ref: main
+
+  task_management_module:
+    path: ../task_management_module
+  wedding_service_module:
+    git:
+      url: https://github.com/DangDDT/wedding_service_module.git
+      ref: dev
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,7 +78,9 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.13.1
-  isar_generator: *isar_version
+  isar_generator: 3.1.0+1
+dependency_overrides:
+  http: ^0.13.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
