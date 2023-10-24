@@ -1,4 +1,4 @@
-package tech.fpt.weddingPlannerManagement
+package tech.fpt.wedding_planner_management
 
 import io.flutter.embedding.android.FlutterActivity
 

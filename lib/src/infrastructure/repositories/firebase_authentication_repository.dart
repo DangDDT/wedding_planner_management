@@ -13,7 +13,11 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
   FirebaseAuthenticationRepository({
     FirebaseAuth? firebaseAuth,
     required Environment? environment,
-  }) : _firebaseAuthInstance = firebaseAuth ?? FirebaseAuth.instance;
+  }) : _firebaseAuthInstance = firebaseAuth ?? FirebaseAuth.instance
+          ..setSettings(
+            forceRecaptchaFlow: false,
+            appVerificationDisabledForTesting: true,
+          );
 
   @override
   Future<String> createUserWithEmailAndPassword({

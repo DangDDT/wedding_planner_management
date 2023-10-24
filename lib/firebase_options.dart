@@ -26,9 +26,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -48,32 +54,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAqeiclNSNzw16CJOsGfyWpOQezlsjgnGM',
-    appId: '1:716165936197:android:af093324fc4b0bfe521f2c',
+    appId: '1:716165936197:android:36175de6eab3bb10521f2c',
     messagingSenderId: '716165936197',
     projectId: 'wedding-service-wss',
     databaseURL: 'https://wedding-service-wss-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'wedding-service-wss.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB6Pm2J5lauCnvwntFl4GwBRStqkzPKYxY',
-    appId: '1:716165936197:ios:5bd691fb92920228521f2c',
-    messagingSenderId: '716165936197',
-    projectId: 'wedding-service-wss',
-    databaseURL: 'https://wedding-service-wss-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'wedding-service-wss.appspot.com',
-    iosClientId: '716165936197-v53brv1nlfj2b1r798k0ik52iji30i29.apps.googleusercontent.com',
-    iosBundleId: 'com.example.weddingPlannerManagement',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB6Pm2J5lauCnvwntFl4GwBRStqkzPKYxY',
-    appId: '1:716165936197:ios:d9fad0c3a6513c63521f2c',
-    messagingSenderId: '716165936197',
-    projectId: 'wedding-service-wss',
-    databaseURL: 'https://wedding-service-wss-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'wedding-service-wss.appspot.com',
-    iosClientId: '716165936197-4gp8h4bg80cnqh9s74t6e88nob961hic.apps.googleusercontent.com',
-    iosBundleId: 'com.example.weddingPlannerManagement.RunnerTests',
   );
 }

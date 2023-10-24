@@ -1,10 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:user_module/core/core.dart';
+import 'package:wedding_planner_management/core/core.dart';
 import 'package:wedding_planner_management/src/domain/services/firebase/firebase_authentication_service.dart';
-
-import '../../constants/default_constants.dart';
-import '../../routers/router_constant.dart';
 
 class UserModuleManager {
   static final FirebaseAuthenticationService _firebaseAuthenticationService =
@@ -36,7 +36,12 @@ class UserModuleManager {
             password: password,
           );
           return token;
-        } catch (e) {
+        } catch (e, stackTrace) {
+          log(
+            e.toString(),
+            name: 'UserModuleManager - onGetFirebaseTokenCallback',
+            stackTrace: stackTrace,
+          );
           rethrow;
         }
       },

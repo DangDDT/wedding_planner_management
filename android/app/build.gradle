@@ -26,7 +26,7 @@ if (flutterCompileSdkVersion == null) {
 }
 def flutterMinSdkVersion = localProperties.getProperty('flutter.minSdkVersion')
 if (flutterMinSdkVersion == null) {
-    flutterMinSdkVersion = 19
+    flutterMinSdkVersion = 24
 }
 def flutterTargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
 if (flutterTargetSdkVersion == null) {
@@ -49,7 +49,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "tech.fpt.weddingPlannerManagement"
+    namespace "tech.fpt.wedding_planner_management"
     compileSdkVersion flutterCompileSdkVersion.toInteger()
     ndkVersion flutter.ndkVersion
 
@@ -67,7 +67,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "tech.fpt.weddingPlannerManagement"
+        applicationId "tech.fpt.wedding_planner_management"
         minSdkVersion flutterMinSdkVersion.toInteger()
         targetSdkVersion flutterTargetSdkVersion.toInteger()
         versionCode flutterVersionCode.toInteger()
@@ -148,5 +148,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
     implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+    // implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
 }

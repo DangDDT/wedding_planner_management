@@ -10,10 +10,11 @@ import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  final app = await Firebase.initializeApp(
     name: 'WPMS',
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await NotificationService().initNotification();
   tz.initializeTimeZones();
   await bootstrap(
