@@ -17,6 +17,7 @@ void main() async {
 
   await NotificationService().initNotification();
   tz.initializeTimeZones();
+
   await bootstrap(
     App.new,
     Environment.dev,

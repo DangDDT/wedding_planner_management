@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wedding_planner_management/src/domain/exceptions/exceptions.dart';
 import 'package:wedding_planner_management/src/domain/services/firebase/firebase_authentication_service.dart';
 
-import '../../../core/core.dart';
 import '../../../environment.dart';
 
 class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
@@ -53,7 +53,7 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
         );
       }
       return token;
-    } on FirebaseAuthException catch (e, stackTrace) {
+    } on FirebaseAuthException catch (e) {
       String? errorMessage;
       switch (e.code) {
         case 'user-not-found':
@@ -76,28 +76,13 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
         Get.snackbar(
           'Đăng nhập thất bại',
           errorMessage,
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
-        Logger.log(
-          errorMessage,
-          name: 'FirebaseAuthenticationRepository_getCurrentUser()',
-          stackTrace: stackTrace,
-        );
       }
-      Logger.log(
-        e.toString(),
-        name: 'FirebaseAuthenticationRepository_getCurrentUser()',
-        stackTrace: stackTrace,
-      );
       rethrow;
-    } catch (e, stackTrace) {
-      Logger.log(
-        e.toString(),
-        name: 'FirebaseAuthenticationRepository_getCurrentUser()',
-        stackTrace: stackTrace,
-      );
+    } catch (e) {
       rethrow;
     }
   }
@@ -114,9 +99,17 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
     required String password,
   }) async {
     try {
-      final user = await _firebaseAuthInstance!.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final googleProvider = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      final user = await _firebaseAuthInstance!.signInWithCredential(
+        googleProvider,
       );
       if (user.user == null) {
         throw const RemoteException(
@@ -139,12 +132,44 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
         );
       }
       return token;
-    } catch (e, stackTrace) {
-      Logger.log(
-        e.toString(),
-        name: 'FirebaseAuthenticationRepository_signInWithEmailAndPassword()',
-        stackTrace: stackTrace,
+    } on FirebaseAuthException catch (e) {
+      String? errorMessage;
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'Không tìm thấy user';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Sai mật khẩu';
+          break;
+        case 'invalid-email':
+          errorMessage = 'Email không hợp lệ';
+          break;
+        case 'user-disabled':
+          errorMessage = 'Tài khoản đã bị khóa';
+          break;
+        case 'unknown':
+          errorMessage = 'Lỗi không xác định';
+          break;
+      }
+      if (errorMessage != null) {
+        Get.snackbar(
+          'Đăng nhập thất bại',
+          errorMessage,
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+      throw RemoteException(
+        kind: RemoteExceptionKind.serverError,
+        httpErrorCode: 500,
+        serverError: ServerError(
+          generalServerStatusCode: 500,
+          generalMessage: errorMessage ?? 'Lỗi không xác định',
+          generalError: e.toString(),
+        ),
       );
+    } catch (e) {
       rethrow;
     }
   }

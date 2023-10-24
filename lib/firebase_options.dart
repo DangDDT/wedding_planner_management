@@ -57,7 +57,8 @@ class DefaultFirebaseOptions {
     appId: '1:716165936197:android:36175de6eab3bb10521f2c',
     messagingSenderId: '716165936197',
     projectId: 'wedding-service-wss',
-    databaseURL: 'https://wedding-service-wss-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL:
+        'https://wedding-service-wss-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'wedding-service-wss.appspot.com',
   );
 }
