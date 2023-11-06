@@ -14,6 +14,16 @@ class CoreTheme {
             bodyColor: Colors.black,
             displayColor: Colors.black,
           ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+            borderSide: BorderSide.none,
+          ),
+          fillColor: const Color.fromARGB(255, 175, 114, 10).withOpacity(0.1),
+          filled: true,
+        ),
       );
 
   static ThemeData get darkTheme => ThemeData(

@@ -1,6 +1,7 @@
 import 'package:user_module/core/user_module.dart';
 import 'package:wedding_planner_management/core/core.dart';
 
+import 'service_module/service_module_manager.dart';
 import 'task_management_module/task_management_module_manager.dart';
 
 class ModuleManager {
@@ -8,6 +9,7 @@ class ModuleManager {
     await Future.wait([
       UserModuleManager.init(),
       TaskManagementModuleManager.init(),
+      ServiceModuleManager.init(),
     ]);
   }
 
@@ -16,12 +18,14 @@ class ModuleManager {
   }) async {
     await Future.wait([
       TaskManagementModuleManager.login(appUser: appUser),
+      ServiceModuleManager.login(appUser: appUser),
     ]);
   }
 
   static Future<void> logoutModules() async {
     await Future.wait([
       TaskManagementModuleManager.logout(),
+      ServiceModuleManager.logout(),
     ]);
   }
 }

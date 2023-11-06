@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:wedding_planner_management/src/domain/exceptions/exceptions.dart';
 import 'package:wedding_planner_management/src/domain/services/firebase/firebase_authentication_service.dart';
 
@@ -57,7 +56,7 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
       String? errorMessage;
       switch (e.code) {
         case 'user-not-found':
-          errorMessage = 'Không tìm thấy user';
+          errorMessage = 'Không tìm thấy tài khoản trong hệ thống';
           break;
         case 'wrong-password':
           errorMessage = 'Sai mật khẩu';
@@ -99,17 +98,10 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
     required String password,
   }) async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-      final googleProvider = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-      final user = await _firebaseAuthInstance!.signInWithCredential(
-        googleProvider,
+      final user = await _firebaseAuthInstance!.signInWithEmailAndPassword(
+        email: email,
+        password: password,
       );
       if (user.user == null) {
         throw const RemoteException(

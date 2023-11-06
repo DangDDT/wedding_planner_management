@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:wedding_planner_management/core/modules/user_module/user_module_manager.dart';
 import 'package:wedding_planner_management/src/domain/services/firebase/firebase_authentication_service.dart';
 import 'package:wedding_planner_management/src/infrastructure/repositories/firebase_authentication_repository.dart';
+import 'package:wss_repository/wss_repository.dart';
 
 import '../../environment.dart';
 import '../../src/domain/services/apis/base_api_service.dart';
@@ -54,6 +56,15 @@ class GlobalBinding {
         baseUrl: coreUri.appBaseUrl,
       ),
       tag: DioClient.tag,
+    );
+
+    WssRepository.init(
+      isShowDioLogger: true,
+      authConfig: AuthConfig(
+        accessToken: () => UserModuleManager.getAccessToken,
+        onRefreshTokenCallback: null,
+        onUnauthorizedCallback: null,
+      ),
     );
 
     // Get.put<BaseApiClient>(

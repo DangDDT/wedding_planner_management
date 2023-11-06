@@ -19,11 +19,6 @@ class UserModuleManager {
   static Future<void> init() async {
     await UserModule.init(
       isShowLog: kDebugMode,
-
-      ///MockData
-      mockConfig: const MockConfig(
-        role: Role.partner,
-      ),
       baseUrlConfig: BaseUrlConfig(
         baseUrl: DefaultConstants.baseUrl,
       ),

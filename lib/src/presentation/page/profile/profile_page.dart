@@ -11,17 +11,57 @@ class ProfilePage extends StatelessWidget {
     return GetBuilder<ProfileController>(
       init: ProfileController(),
       builder: (controller) {
-        return const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              UserProfileView(),
-              Spacer(),
-              _LogoutButton(),
-            ],
+        return const SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                UserProfileView(),
+                kGapH12,
+                _MyCategory(),
+                kGapH12,
+                _LogoutButton(),
+              ],
+            ),
           ),
         );
       },
+    );
+  }
+}
+
+class _MyCategory extends GetView<ProfileController> {
+  const _MyCategory();
+
+  @override
+  Widget build(BuildContext context) {
+    final String title = controller.currentUser?.role.isPartner ?? false
+        ? 'Danh mục dịch vụ của tôi'
+        : 'Danh mục công việc của tôi';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+          leading: Icon(
+            Icons.category_rounded,
+            color: kTheme.colorScheme.primary,
+          ),
+          title: Text(
+            title,
+            style: kTheme.textTheme.titleLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        UserCategoryView(
+          categoryId: controller.currentUser?.extraData['categoryId'],
+          config: UserCategoryViewConfig(
+            isShowCommission: controller.currentUser?.role.isPartner ?? false,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -28,14 +28,25 @@ class _PartnerDashboardPageState extends State<PartnerDashboardPage> {
           _taskAlmostDueController.loadTaskProgressData(),
         ]);
       },
-      child: const SingleChildScrollView(
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         child: Column(
           children: [
-            ProgressTaskView(),
+            ProgressTaskView(
+              controller: _progressTaskController,
+            ),
             kGapH12,
-            DashboardTaskReminderView(),
+            TaskAlmostDueView(
+              controller: _taskAlmostDueController,
+            ),
             kGapH12,
-            TaskAlmostDueView(),
+            ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 200),
+              child: DashboardTaskReminderView(
+                controller: _dashboardTaskReminderController,
+              ),
+            ),
           ],
         ),
       ),

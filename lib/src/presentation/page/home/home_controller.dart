@@ -7,7 +7,6 @@ import 'package:wedding_planner_management/src/presentation/page/profile/profile
 import 'package:wedding_service_module/wedding_service_module.dart';
 
 import '../dashboard/staff/staff_dashboard_page.dart';
-import '../task/task_page.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -58,28 +57,22 @@ class StaffHomeTab extends HomeTab {
       : super(
           tabs: [
             HomeTabItem(
-              name: 'Trang chủ',
-              title: 'Thống kê',
-              icon: Icons.home,
-              page: const StaffDashboardPage(),
-            ),
-            HomeTabItem(
               name: 'Công việc',
               title: 'Công việc của tôi',
               icon: Icons.work,
-              page: const TaskPage(),
+              page: const StaffDashboardPage(),
             ),
             HomeTabItem(
               name: 'Thông tin',
               title: 'Thông tin cá nhân',
               icon: Icons.person,
               page: const ProfilePage(),
-              // actions: [
-              //   const IconButton(
-              //     onPressed: UserModuleManager.toEditProfilePage,
-              //     icon: Icon(Icons.edit),
-              //   ),
-              // ],
+              actions: [
+                const IconButton(
+                  onPressed: UserModuleManager.toEditProfilePage,
+                  icon: Icon(Icons.edit),
+                ),
+              ],
             ),
           ],
         );
@@ -89,27 +82,33 @@ class PartnerHomeTab extends HomeTab {
   PartnerHomeTab()
       : super(
           tabs: [
-            HomeTabItem(
-              name: 'Trang chủ',
-              title: 'Thống kê',
-              icon: Icons.home,
-              page: const PartnerDashboardPage(),
-            ),
+            // HomeTabItem(
+            //   name: 'Trang chủ',
+            //   title: 'Thống kê',
+            //   icon: Icons.home,
+            //   page: const PartnerDashboardPage(),
+            // ),
             HomeTabItem(
               name: 'Dịch vụ',
               icon: Icons.room_service,
-              page: const WeddingServicesPage(),
+              page: const PartnerServiceDashboardPage(),
               isHasAppbar: false,
             ),
             HomeTabItem(
-              name: 'Công việc',
+              name: 'Công việc của tôi',
               icon: Icons.work,
-              page: const TaskPage(),
+              page: const PartnerDashboardPage(),
             ),
             HomeTabItem(
               name: 'Thông tin',
               icon: Icons.person,
               page: const ProfilePage(),
+              actions: [
+                const IconButton(
+                  onPressed: UserModuleManager.toEditProfilePage,
+                  icon: Icon(Icons.edit),
+                ),
+              ],
             ),
           ],
         );
