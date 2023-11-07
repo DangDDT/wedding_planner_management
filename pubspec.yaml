@@ -58,21 +58,21 @@ dependencies:
       url: https://github.com/DangDDT/picker_package.git
       ref: main
   user_module:
-    path: ../user_module
-    # git:
-    #   url: https://github.com/DangDDT/user_module.git
-    #   ref: config-api-login
+    # path: ../user_module
+    git:
+      url: https://github.com/DangDDT/user_module.git
+      ref: config-api-login
 
   task_management_module:
-    path: ../task_management_module
-    # git:
-    #   url: https://github.com/DangDDT/task_management_module.git
-    #   ref: dev
+    # path: ../task_management_module
+    git:
+      url: https://github.com/DangDDT/task_management_module.git
+      ref: config-api
   wedding_service_module:
-    path: ../wedding_service_module
-    # git:
-    #   url: https://github.com/DangDDT/wedding_service_module.git
-    #   ref: dev
+    # path: ../wedding_service_module
+    git:
+      url: https://github.com/DangDDT/wedding_service_module.git
+      ref: dev
   wss_repository:
     git:
       url: https://github.com/DangDDT/wss_repository.git

@@ -1327,9 +1327,11 @@ packages:
   task_management_module:
     dependency: "direct main"
     description:
-      path: "../task_management_module"
-      relative: true
-    source: path
+      path: "."
+      ref: config-api
+      resolved-ref: "33b1390544b8d90372c2503fc10f3cc77609763a"
+      url: "https://github.com/DangDDT/task_management_module.git"
+    source: git
     version: "0.0.1"
   term_glyph:
     dependency: transitive
@@ -1454,9 +1456,11 @@ packages:
   user_module:
     dependency: "direct main"
     description:
-      path: "../user_module"
-      relative: true
-    source: path
+      path: "."
+      ref: config-api-login
+      resolved-ref: aa5e83470ef2a98f0000c9ed1786fc0e905a1e9d
+      url: "https://github.com/DangDDT/user_module.git"
+    source: git
     version: "0.0.1"
   uuid:
     dependency: transitive
@@ -1542,9 +1546,11 @@ packages:
   wedding_service_module:
     dependency: "direct main"
     description:
-      path: "../wedding_service_module"
-      relative: true
-    source: path
+      path: "."
+      ref: dev
+      resolved-ref: "55f658ed089141cd8f88535daa12118298e22701"
+      url: "https://github.com/DangDDT/wedding_service_module.git"
+    source: git
     version: "0.0.1"
   win32:
     dependency: transitive
