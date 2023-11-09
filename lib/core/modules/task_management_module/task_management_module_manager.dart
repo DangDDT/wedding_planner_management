@@ -18,6 +18,7 @@ class TaskManagementModuleManager {
       authConfig: AuthConfig(
         accessToken: () async => "",
         onRefreshTokenCallback: () async => "",
+        onUnauthorizedCallback: () async => UserModuleManager.logout(),
       ),
       onCreateLocalNotificationCallback: (id, title, body, at) async {
         try {
