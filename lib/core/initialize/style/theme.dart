@@ -24,6 +24,14 @@ class CoreTheme {
           fillColor: const Color.fromARGB(255, 175, 114, 10).withOpacity(0.1),
           filled: true,
         ),
+        cardTheme: const CardTheme(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+          ),
+        ),
       );
 
   static ThemeData get darkTheme => ThemeData(

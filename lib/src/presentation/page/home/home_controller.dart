@@ -4,6 +4,7 @@ import 'package:user_module/core/core.dart';
 import 'package:wedding_planner_management/core/core.dart';
 import 'package:wedding_planner_management/src/presentation/page/dashboard/partner/partner_dashboard_page.dart';
 import 'package:wedding_planner_management/src/presentation/page/profile/profile_page.dart';
+import 'package:wedding_planner_management/src/presentation/page/revenue/revenue_page.dart';
 import 'package:wedding_service_module/wedding_service_module.dart';
 
 import '../dashboard/staff/staff_dashboard_page.dart';
@@ -82,22 +83,29 @@ class PartnerHomeTab extends HomeTab {
   PartnerHomeTab()
       : super(
           tabs: [
-            // HomeTabItem(
-            //   name: 'Trang chủ',
-            //   title: 'Thống kê',
-            //   icon: Icons.home,
-            //   page: const PartnerDashboardPage(),
-            // ),
+            HomeTabItem(
+              name: 'Công việc',
+              title: 'Công việc của tôi',
+              icon: Icons.work,
+              page: const PartnerDashboardPage(),
+            ),
             HomeTabItem(
               name: 'Dịch vụ',
-              icon: Icons.room_service,
-              page: const PartnerServiceDashboardPage(),
+              icon: Icons.store,
+              page: const WeddingServicesPage(),
               isHasAppbar: false,
             ),
             HomeTabItem(
-              name: 'Công việc của tôi',
-              icon: Icons.work,
-              page: const PartnerDashboardPage(),
+              name: 'Lịch bận',
+              icon: Icons.calendar_today,
+              page: const ServiceCalendarPage(),
+              isHasAppbar: false,
+            ),
+            HomeTabItem(
+              name: 'Doanh thu',
+              title: 'Thống kê doanh thu',
+              icon: Icons.monetization_on,
+              page: const RevenuePage(),
             ),
             HomeTabItem(
               name: 'Thông tin',

@@ -64,10 +64,10 @@ dependencies:
       ref: config-api-login
 
   task_management_module:
-    # path: ../task_management_module
-    git:
-      url: https://github.com/DangDDT/task_management_module.git
-      ref: config-api
+    path: ../task_management_module
+    # git:
+    #   url: https://github.com/DangDDT/task_management_module.git
+    #   ref: config-api
   wedding_service_module:
     # path: ../wedding_service_module
     git:
