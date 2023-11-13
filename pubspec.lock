@@ -1327,9 +1327,11 @@ packages:
   task_management_module:
     dependency: "direct main"
     description:
-      path: "../task_management_module"
-      relative: true
-    source: path
+      path: "."
+      ref: config-api
+      resolved-ref: "0538f283c29f54ace4ac3d363ecff6f70e6631ce"
+      url: "https://github.com/DangDDT/task_management_module.git"
+    source: git
     version: "0.0.1"
   term_glyph:
     dependency: transitive
