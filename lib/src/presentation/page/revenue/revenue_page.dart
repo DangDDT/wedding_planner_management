@@ -12,6 +12,7 @@ class RevenuePage extends StatelessWidget {
         child: Column(
           children: [
             RevenueStats(),
+            RecentTransactionsView(),
           ],
         ),
       ),

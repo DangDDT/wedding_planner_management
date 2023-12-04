@@ -15,11 +15,6 @@ class TaskManagementModuleManager {
       baseUrlConfig: BaseUrlConfig(
         baseUrl: '',
       ),
-      authConfig: AuthConfig(
-        accessToken: () async => "",
-        onRefreshTokenCallback: () async => "",
-        onUnauthorizedCallback: () async => UserModuleManager.logout(),
-      ),
       onCreateLocalNotificationCallback: (id, title, body, at) async {
         try {
           await NotificationService().showNotification(
@@ -69,6 +64,15 @@ class TaskManagementModuleManager {
         userId: appUser.id,
         fullName: appUser.fullName,
         avatar: appUser.avatar,
+      ),
+      myCategoryIdCallback: () async => appUser.extraData['categoryId'],
+      viewByRoleConfig: ViewByRoleConfig(
+        isShowComissionValue: appUser.role == Role.partner,
+        isShowRevenueValue: appUser.role == Role.partner,
+      ),
+      authConfig: AuthConfig(
+        accessToken: () async => UserModuleManager.getAccessToken,
+        onRefreshTokenCallback: () async => UserModuleManager.getAccessToken,
       ),
       listTaskTabs: listTaskTab,
     );

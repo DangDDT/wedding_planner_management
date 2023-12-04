@@ -71,12 +71,16 @@ class _LogoutButton extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      style: ElevatedButton.styleFrom(
+    return FilledButton.tonalIcon(
+      style: FilledButton.styleFrom(
         minimumSize: const Size(double.infinity, 48),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
+          side: BorderSide(
+            color: context.theme.hintColor.withOpacity(0.2),
+          ),
         ),
+        backgroundColor: Colors.white,
       ),
       onPressed: controller.logout,
       icon: const Icon(
