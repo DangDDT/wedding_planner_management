@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:wedding_planner_management/core/core.dart';
+import 'package:wedding_planner_management/src/domain/enums/private/loading_enum.dart';
 import 'package:wedding_planner_management/src/domain/models/notification_data_model.dart';
 import 'package:wedding_planner_management/src/presentation/@shared/empty_handler.dart';
 import 'package:wedding_planner_management/src/presentation/page/notification/notifications_page_controller.dart';
@@ -15,51 +16,60 @@ class NotificationsPage extends GetView<NotificationsPageController> {
       appBar: AppBar(
         title: const Text('Thông báo'),
       ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          controller.pagingController.refresh();
-        },
-        child: PagedListView<int, NotificationDataModel>.separated(
-          pagingController: controller.pagingController,
-          builderDelegate: PagedChildBuilderDelegate<NotificationDataModel>(
-            itemBuilder: (context, item, index) {
-              return _NotificationWidget(
-                notification: item,
-                onTap: (notification) async {
-                  await controller.markAsRead(notification);
-                },
-              );
-            },
-            firstPageErrorIndicatorBuilder: (context) => EmptyErrorHandler(
-              title: 'Có lỗi xảy ra',
-              description: 'Không thể tải dữ liệu',
-              reloadCallback: () => controller.pagingController.refresh(),
-            ),
-            noItemsFoundIndicatorBuilder: (context) => EmptyErrorHandler(
-              banner: Icon(
-                Icons.notifications_off_outlined,
-                size: 100,
-                color: context.theme.colorScheme.primary.withOpacity(0.5),
-              ),
-              title: 'Không có thông báo',
-              description: 'Bạn chưa có thông báo nào',
-              reloadCallback: () => controller.pagingController.refresh(),
-            ),
-            noMoreItemsIndicatorBuilder: (context) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  const Divider(height: 12, indent: 32, endIndent: 32),
-                  Text(
-                    'Đã hết thông báo',
-                    style: context.textTheme.bodyMedium,
+      body: Column(
+        children: [
+          const _NotificationPermissionStatus(),
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                controller.pagingController.refresh();
+              },
+              child: PagedListView<int, NotificationDataModel>.separated(
+                pagingController: controller.pagingController,
+                builderDelegate:
+                    PagedChildBuilderDelegate<NotificationDataModel>(
+                  itemBuilder: (context, item, index) {
+                    return _NotificationWidget(
+                      notification: item,
+                      onTap: (notification) async {
+                        await controller.markAsRead(notification);
+                      },
+                    );
+                  },
+                  firstPageErrorIndicatorBuilder: (context) =>
+                      EmptyErrorHandler(
+                    title: 'Có lỗi xảy ra',
+                    description: 'Không thể tải dữ liệu',
+                    reloadCallback: () => controller.pagingController.refresh(),
                   ),
-                ],
+                  noItemsFoundIndicatorBuilder: (context) => EmptyErrorHandler(
+                    banner: Icon(
+                      Icons.notifications_off_outlined,
+                      size: 100,
+                      color: context.theme.colorScheme.primary.withOpacity(0.5),
+                    ),
+                    title: 'Không có thông báo',
+                    description: 'Bạn chưa có thông báo nào',
+                    reloadCallback: () => controller.pagingController.refresh(),
+                  ),
+                  noMoreItemsIndicatorBuilder: (context) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        const Divider(height: 12, indent: 32, endIndent: 32),
+                        Text(
+                          'Đã hết thông báo',
+                          style: context.textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                separatorBuilder: _buildDateSeparator,
               ),
             ),
           ),
-          separatorBuilder: _buildDateSeparator,
-        ),
+        ],
       ),
     );
   }
@@ -189,5 +199,58 @@ class _NotificationWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _NotificationPermissionStatus
+    extends GetView<NotificationsPageController> {
+  const _NotificationPermissionStatus();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      if (controller.permissionState.value.state != LoadingState.success) {
+        return const SizedBox.shrink();
+      }
+      final isGranted = controller.permissionState.value.value ?? false;
+
+      if (isGranted) {
+        return const SizedBox.shrink();
+      }
+
+      return Container(
+        color: context.theme.colorScheme.error.withOpacity(0.1),
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          children: [
+            Icon(
+              Icons.error_outline,
+              color: context.theme.colorScheme.error,
+            ),
+            kGapW12,
+            Expanded(
+              child: Text(
+                'Để nhận thông báo, vui lòng cho phép ứng dụng truy cập vào thông báo.',
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: context.theme.colorScheme.error,
+                ),
+              ),
+            ),
+            kGapW12,
+            TextButton(
+              onPressed: () async {
+                await controller.requestPermission();
+              },
+              child: Text(
+                'Cho phép',
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: context.theme.colorScheme.primary,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

@@ -7,6 +7,7 @@ import '../../domain/services/firebase/firebase_messaging_service.dart';
 
 class FirebaseMessagingRepository implements FirebaseMessagingService {
   final FirebaseMessaging _firebaseMessaging;
+  AuthorizationStatus? _authorizationStatus;
 
   FirebaseMessagingRepository({
     FirebaseMessaging? firebaseMessaging,
@@ -22,6 +23,8 @@ class FirebaseMessagingRepository implements FirebaseMessagingService {
           name: 'FirebaseMessagingRepository.requestPermissions',
           stackTrace: stackTrace);
     }
+
+    _authorizationStatus = settings?.authorizationStatus;
 
     if (Platform.isIOS) {
       if (settings != null &&
@@ -41,4 +44,12 @@ class FirebaseMessagingRepository implements FirebaseMessagingService {
 
   @override
   Future<String> get token async => await _firebaseMessaging.getToken() ?? '';
+
+  @override
+  Future<void> subscribeToTopic(String topic) {
+    return _firebaseMessaging.subscribeToTopic(topic);
+  }
+
+  @override
+  AuthorizationStatus? get authorizationStatus => _authorizationStatus;
 }

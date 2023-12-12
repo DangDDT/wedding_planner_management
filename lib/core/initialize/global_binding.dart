@@ -29,6 +29,10 @@ class GlobalBinding {
     Mapper.instance.registerMappers([
       NotificationDataMapper(),
     ]);
+    Get.put<FirebaseMessagingService>(
+      FirebaseMessagingRepository(),
+      permanent: true,
+    );
     Get.put<FirebaseAuthenticationService>(
       FirebaseAuthenticationRepository(
         firebaseAuth: FirebaseAuth.instance,

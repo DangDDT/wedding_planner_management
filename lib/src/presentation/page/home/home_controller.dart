@@ -58,11 +58,20 @@ class StaffHomeTab extends HomeTab {
       : super(
           tabs: [
             HomeTabItem(
-              name: 'Công việc',
-              title: 'Công việc của tôi',
-              icon: Icons.work,
-              page: const StaffDashboardPage(),
-            ),
+                name: 'Công việc',
+                title: 'Công việc của tôi',
+                icon: Icons.work,
+                page: const StaffDashboardPage(),
+                actions: [
+                  IconButton.filledTonal(
+                    onPressed: () {
+                      Get.toNamed(RouterConstants.notifications);
+                    },
+                    icon: const Icon(
+                      Icons.notifications,
+                    ),
+                  ),
+                ]),
             HomeTabItem(
               name: 'Thông tin',
               title: 'Thông tin cá nhân',
@@ -88,6 +97,16 @@ class PartnerHomeTab extends HomeTab {
               title: 'Công việc của tôi',
               icon: Icons.work,
               page: const PartnerDashboardPage(),
+              actions: [
+                IconButton.filledTonal(
+                  onPressed: () {
+                    Get.toNamed(RouterConstants.notifications);
+                  },
+                  icon: const Icon(
+                    Icons.notifications,
+                  ),
+                ),
+              ],
             ),
             HomeTabItem(
               name: 'Dịch vụ',

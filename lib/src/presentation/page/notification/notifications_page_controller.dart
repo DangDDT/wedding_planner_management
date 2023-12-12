@@ -1,21 +1,28 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:wedding_planner_management/core/modules/user_module/user_module_manager.dart';
 import 'package:wedding_planner_management/src/domain/models/notification_data_model.dart';
+import 'package:wedding_planner_management/src/domain/models/state_data.dart';
+import 'package:wedding_planner_management/src/domain/services/firebase/firebase_messaging_service.dart';
 import 'package:wedding_planner_management/src/domain/services/interfaces/i_notifcation_service.dart';
 
 class NotificationsPageController extends GetxController {
+  final firebaseMessagingService = Get.find<FirebaseMessagingService>();
   final notifyService = Get.find<INotificationService>();
   final limit = 10;
   late final PagingController<int, NotificationDataModel> _pagingController;
   PagingController<int, NotificationDataModel> get pagingController =>
       _pagingController;
+  final permissionState = const StateData<bool>.loading().obs;
 
   @override
   void onInit() {
+    _checkPermission();
     _pagingController = PagingController<int, NotificationDataModel>(
       firstPageKey: 0,
     )..addPageRequestListener(_fetchPage);
+
     super.onInit();
   }
 
@@ -55,6 +62,32 @@ class NotificationsPageController extends GetxController {
       }
     } catch (error) {
       _pagingController.error = error;
+    }
+  }
+
+  Future<void> _checkPermission() async {
+    try {
+      final result = firebaseMessagingService.authorizationStatus;
+      if (result == null) {
+        await firebaseMessagingService.requestPermissions();
+      }
+
+      if (result == AuthorizationStatus.authorized) {
+        permissionState.value = const StateData.success(true);
+      } else {
+        permissionState.value = const StateData.success(false);
+      }
+    } catch (error) {
+      permissionState.value = StateData.error(error.toString());
+    }
+  }
+
+  Future<void> requestPermission() async {
+    try {
+      await firebaseMessagingService.requestPermissions();
+      _checkPermission();
+    } catch (error) {
+      permissionState.value = StateData.error(error.toString());
     }
   }
 }

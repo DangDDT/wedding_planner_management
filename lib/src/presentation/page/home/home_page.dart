@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wedding_planner_management/core/routers/router_constant.dart';
 
 import 'home_controller.dart';
 import 'widgets/bottom_navigation_tabbar.dart';
@@ -21,18 +20,7 @@ class HomePage extends GetView<HomeController> {
                     controller.currentTab.value.title,
                   ),
                   // centerTitle: true,
-                  actions: [
-                    if (controller.currentTab.value.actions != null)
-                      ...controller.currentTab.value.actions!,
-                    IconButton.filledTonal(
-                      onPressed: () {
-                        Get.toNamed(RouterConstants.notifications);
-                      },
-                      icon: const Icon(
-                        Icons.notifications,
-                      ),
-                    ),
-                  ],
+                  actions: controller.currentTab.value.actions,
                 ),
               )
             : null,
