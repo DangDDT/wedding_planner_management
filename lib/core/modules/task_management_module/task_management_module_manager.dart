@@ -69,6 +69,22 @@ class TaskManagementModuleManager {
       viewByRoleConfig: ViewByRoleConfig(
         isShowComissionValue: appUser.role == Role.partner,
         isShowRevenueValue: appUser.role == Role.partner,
+        isShowDeadlineDateValue: appUser.role == Role.staff,
+        isShowExpectedDoDateValue: appUser.role == Role.staff,
+        getDueDateByRole: (task) {
+          if (appUser.role == Role.partner) {
+            return task.startDate;
+          }
+          return task.orderDetail?.endTime;
+        },
+        filterDueDateTitle: appUser.role == Role.partner
+            ? 'Ngày khách cần'
+            : 'Ngày dự kiến thực hiện',
+        cardDueDateTitle:
+            appUser.role == Role.partner ? 'Ngày khách cần' : 'Hạn thực hiện',
+        almostDueDateTitle: appUser.role == Role.partner
+            ? 'Công việc cần hoàn thành'
+            : 'Công việc cần thực hiện',
       ),
       authConfig: AuthConfig(
         accessToken: () async => UserModuleManager.getAccessToken,
