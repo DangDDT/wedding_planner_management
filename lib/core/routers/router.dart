@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:user_module/core/core.dart';
 import 'package:wedding_planner_management/core/modules/task_management_module/task_management_module_manager.dart';
 import 'package:wedding_planner_management/src/presentation/page/home/home_controller.dart';
+import 'package:wedding_planner_management/src/presentation/page/notification/notifications_page.dart';
+import 'package:wedding_planner_management/src/presentation/page/notification/notifications_page_controller.dart';
 import 'package:wedding_service_module/wedding_service_module.dart';
 
 import '../../src/presentation/page/home/home_page.dart';
@@ -19,6 +21,18 @@ class AppRouter {
       binding: BindingsBuilder(() {
         Get.lazyPut<HomeController>(
           () => HomeController(),
+        );
+      }),
+    ),
+    GetPage(
+      name: RouterConstants.notifications,
+      page: () => const NotificationsPage(),
+      middlewares: [
+        AuthMiddleware(),
+      ],
+      binding: BindingsBuilder(() {
+        Get.lazyPut<NotificationsPageController>(
+          () => NotificationsPageController(),
         );
       }),
     ),

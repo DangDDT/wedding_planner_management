@@ -3,7 +3,11 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:wedding_planner_management/core/modules/user_module/user_module_manager.dart';
+import 'package:wedding_planner_management/src/domain/mappers/profiles/notification_data_mapper.dart';
+import 'package:wedding_planner_management/src/domain/mappers/z_mapper.dart';
 import 'package:wedding_planner_management/src/domain/services/firebase/firebase_authentication_service.dart';
+import 'package:wedding_planner_management/src/domain/services/implements/notification_service_impl.dart';
+import 'package:wedding_planner_management/src/domain/services/interfaces/i_notifcation_service.dart';
 import 'package:wedding_planner_management/src/infrastructure/repositories/firebase_authentication_repository.dart';
 import 'package:wss_repository/wss_repository.dart';
 
@@ -22,6 +26,9 @@ class GlobalBinding {
   static void setUpLocator({
     required Environment environment,
   }) {
+    Mapper.instance.registerMappers([
+      NotificationDataMapper(),
+    ]);
     Get.put<FirebaseAuthenticationService>(
       FirebaseAuthenticationRepository(
         firebaseAuth: FirebaseAuth.instance,
@@ -65,6 +72,10 @@ class GlobalBinding {
         onRefreshTokenCallback: null,
         onUnauthorizedCallback: null,
       ),
+    );
+
+    Get.put<INotificationService>(
+      NotificationServiceImpl(),
     );
 
     // Get.put<BaseApiClient>(

@@ -45,7 +45,8 @@ extension DateTimeExt on DateTime {
 
   toDueDateCount() {
     final toDayWithTime = DateTime.now();
-    final toDay = DateTime(toDayWithTime.year, toDayWithTime.month, toDayWithTime.day);
+    final toDay =
+        DateTime(toDayWithTime.year, toDayWithTime.month, toDayWithTime.day);
 
     final data = DateTime(year, month, day);
 
@@ -68,6 +69,24 @@ extension DateTimeExt on DateTime {
 
   String toFullString() {
     return '${DateFormat.Hm().format(this)} ${DateFormat('dd/MM/yyyy').format(this)}';
+  }
+
+  /// Return String type of date before today.
+  /// If date is today, return 'Hôm nay'
+  ///
+  /// If date is yesterday, return 'Hôm qua'
+  ///
+  /// If date is before yesterday, return 'Ngày dd/MM/yyyy'
+  String toRecentlyStringDate() {
+    final now = DateTime.now();
+    final between = difference(now);
+    if (between.inDays.abs() < 1) {
+      return 'Hôm nay';
+    }
+    if (between.inDays.abs() < 2) {
+      return 'Hôm qua';
+    }
+    return 'Ngày ${DateFormat('dd/MM/yyyy').format(this)}';
   }
 
   String toRecentlyString() {

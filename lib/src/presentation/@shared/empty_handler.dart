@@ -47,9 +47,9 @@ class EmptyErrorHandler extends StatelessWidget {
           ),
         if (reloadCallback != null) const SizedBox(height: 28),
         if (reloadCallback != null)
-          ElevatedButton(
+          FilledButton.tonal(
             onPressed: reloadCallback,
-            child: const Text('Reload'),
+            child: const Text('Thử lại'),
           ),
       ],
     );
