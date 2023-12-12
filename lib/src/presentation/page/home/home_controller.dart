@@ -63,12 +63,15 @@ class StaffHomeTab extends HomeTab {
                 icon: Icons.work,
                 page: const StaffDashboardPage(),
                 actions: [
-                  IconButton.filledTonal(
-                    onPressed: () {
-                      Get.toNamed(RouterConstants.notifications);
-                    },
-                    icon: const Icon(
-                      Icons.notifications,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.toNamed(RouterConstants.notifications);
+                      },
+                      child: const Icon(
+                        Icons.notifications,
+                      ),
                     ),
                   ),
                 ]),
@@ -98,12 +101,15 @@ class PartnerHomeTab extends HomeTab {
               icon: Icons.work,
               page: const PartnerDashboardPage(),
               actions: [
-                IconButton.filledTonal(
-                  onPressed: () {
-                    Get.toNamed(RouterConstants.notifications);
-                  },
-                  icon: const Icon(
-                    Icons.notifications,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed(RouterConstants.notifications);
+                    },
+                    child: const Icon(
+                      Icons.notifications,
+                    ),
                   ),
                 ),
               ],

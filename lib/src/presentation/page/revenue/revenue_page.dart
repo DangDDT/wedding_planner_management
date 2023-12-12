@@ -6,15 +6,9 @@ class RevenuePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            RevenueStats(),
-            RecentTransactionsView(),
-          ],
-        ),
+    return const PartnerServiceDashboardPage(
+      viewConfig: PartnerServiceDashboardPageViewConfig(
+        isShowRecentTransactions: true,
       ),
     );
   }

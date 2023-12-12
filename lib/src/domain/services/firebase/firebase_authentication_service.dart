@@ -10,4 +10,5 @@ abstract class FirebaseAuthenticationService {
   Future<void> signOut();
   Future<String> getCurrentUser();
   Future<bool> isUserLoggedIn();
+  Future<String> refreshToken();
 }

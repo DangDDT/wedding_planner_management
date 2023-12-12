@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:user_module/core/user_module.dart';
 import 'package:wedding_planner_management/core/core.dart';
+import 'package:wedding_planner_management/src/domain/services/firebase/firebase_authentication_service.dart';
 import 'package:wedding_service_module/wedding_service_module.dart';
 
 class ServiceModuleManager {
   static List<GetPage> routes = ServiceModuleManager.routes;
+  static final _firebaseAuthenticationService =
+      Get.find<FirebaseAuthenticationService>();
 
   static Future<void> init() async {
     await WeddingServiceModule.init(
@@ -25,7 +28,8 @@ class ServiceModuleManager {
       ),
       authConfig: AuthConfig(
         accessToken: () async => UserModule.getAccessToken,
-        onRefreshTokenCallback: () async => UserModule.getAccessToken,
+        onRefreshTokenCallback: () async =>
+            _firebaseAuthenticationService.refreshToken(),
       ),
       onGetMyCategoryCallback: () async => appUser.extraData['categoryId'],
     );

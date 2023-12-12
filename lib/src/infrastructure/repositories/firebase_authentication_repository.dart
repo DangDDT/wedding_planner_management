@@ -173,4 +173,64 @@ class FirebaseAuthenticationRepository extends FirebaseAuthenticationService {
       await _firebaseAuthInstance!.signOut();
     }
   }
+
+  @override
+  Future<String> refreshToken() async {
+    try {
+      final user = _firebaseAuthInstance!.currentUser;
+      if (user == null) {
+        throw const RemoteException(
+          kind: RemoteExceptionKind.serverError,
+          httpErrorCode: 500,
+          serverError: ServerError(
+            generalServerStatusCode: 500,
+            generalMessage: 'Firebase_Không tìm thấy user',
+          ),
+        );
+      }
+      final token = await user.getIdToken();
+      if (token == null) {
+        throw const RemoteException(
+          kind: RemoteExceptionKind.serverError,
+          httpErrorCode: 500,
+          serverError: ServerError(
+            generalServerStatusCode: 500,
+            generalMessage: 'Firebase_Không tìm thấy token',
+          ),
+        );
+      }
+      return token;
+    } on FirebaseAuthException catch (e) {
+      String? errorMessage;
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'Không tìm thấy tài khoản trong hệ thống';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Sai mật khẩu';
+          break;
+        case 'invalid-email':
+          errorMessage = 'Email không hợp lệ';
+          break;
+        case 'user-disabled':
+          errorMessage = 'Tài khoản đã bị khóa';
+          break;
+        case 'unknown':
+          errorMessage = 'Lỗi không xác định';
+          break;
+      }
+      if (errorMessage != null) {
+        Get.snackbar(
+          'Đăng nhập thất bại',
+          errorMessage,
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+      rethrow;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

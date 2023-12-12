@@ -4,10 +4,13 @@ import 'package:task_management_module/core/module_configs.dart';
 import 'package:task_management_module/core/task_management_module.dart';
 import 'package:user_module/core/user_module.dart';
 import 'package:wedding_planner_management/core/core.dart';
+import 'package:wedding_planner_management/src/domain/services/firebase/firebase_authentication_service.dart';
 import 'package:wedding_planner_management/src/infrastructure/local_notification/local_notification_service.dart';
 
 class TaskManagementModuleManager {
   static List<GetPage> routes = TaskManagementModule.pageRoutes;
+  static final _firebaseAuthenticationService =
+      Get.find<FirebaseAuthenticationService>();
 
   static Future<void> init() async {
     await TaskManagementModule.init(
@@ -88,7 +91,8 @@ class TaskManagementModuleManager {
       ),
       authConfig: AuthConfig(
         accessToken: () async => UserModuleManager.getAccessToken,
-        onRefreshTokenCallback: () async => UserModuleManager.getAccessToken,
+        onRefreshTokenCallback: () async =>
+            _firebaseAuthenticationService.refreshToken(),
       ),
       listTaskTabs: listTaskTab,
     );

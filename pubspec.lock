@@ -1321,7 +1321,7 @@ packages:
     description:
       path: "."
       ref: config-api
-      resolved-ref: "0865aa1ad3bcf610b71dabb207b62055761d97aa"
+      resolved-ref: "7028ede4e8ed7f31c02556ad93be12592bbbe70f"
       url: "https://github.com/DangDDT/task_management_module.git"
     source: git
     version: "0.0.1"
@@ -1450,7 +1450,7 @@ packages:
     description:
       path: "."
       ref: config-api-login
-      resolved-ref: "61739bce76cbf7bc11a7eede89721262d2966570"
+      resolved-ref: "2458dc634c949c87f4349641642842211738ae73"
       url: "https://github.com/DangDDT/user_module.git"
     source: git
     version: "0.0.1"
@@ -1540,7 +1540,7 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: "5482f8216775dfd473c8e725b05a10f030b28596"
+      resolved-ref: "746bf7808370ff8912cd425ad16dc09594d272bd"
       url: "https://github.com/DangDDT/wedding_service_module.git"
     source: git
     version: "0.0.1"
@@ -1573,7 +1573,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "98fa2a86ac491497da22a64dc04de721711acd59"
+      resolved-ref: "75ecb9e4277fb24bfd68d9fc66ac1cd79b9ffa74"
       url: "https://github.com/DangDDT/wss_repository.git"
     source: git
     version: "0.0.1"
