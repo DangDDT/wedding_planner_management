@@ -76,9 +76,9 @@ class TaskManagementModuleManager {
         isShowExpectedDoDateValue: appUser.role == Role.staff,
         getDueDateByRole: (task) {
           if (appUser.role == Role.partner) {
-            return task.startDate;
+            return task.orderDetail?.startTime;
           }
-          return task.orderDetail?.endTime;
+          return task.endDate;
         },
         filterDueDateTitle: appUser.role == Role.partner
             ? 'Ngày khách cần'
