@@ -41,6 +41,7 @@ class App extends StatelessWidget {
       locale: Get.deviceLocale,
       theme: CoreTheme.lightTheme,
       darkTheme: CoreTheme.darkTheme,
+      supportedLocales: SupportedLocales.supportedLocales,
       transitionDuration: const Duration(milliseconds: 300),
       enableLog: kDebugMode,
       onInit: () async {

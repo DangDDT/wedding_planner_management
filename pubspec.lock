@@ -173,10 +173,10 @@ packages:
     dependency: transitive
     description:
       name: camera_platform_interface
-      sha256: "86fd4fc597c6e455265ddb5884feb352d0171ad14b9cdf3aba30da59b25738c4"
+      sha256: b6a568984254cadaca41a6b896d87d3b2e79a2e5791afa036f8d524c6783b93a
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.0"
+    version: "2.7.0"
   camera_web:
     dependency: transitive
     description:
@@ -213,10 +213,10 @@ packages:
     dependency: transitive
     description:
       name: cli_util
-      sha256: b8db3080e59b2503ca9e7922c3df2072cf13992354d5e944074ffa836fba43b7
+      sha256: c05b7406fdabc7a49a3929d4af76bcaccbbffcbcdcf185b082e1ae07da323d19
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.0"
+    version: "0.4.1"
   clock:
     dependency: transitive
     description:
@@ -658,10 +658,10 @@ packages:
     dependency: transitive
     description:
       name: freezed
-      sha256: "21bf2825311de65501d22e563e3d7605dff57fb5e6da982db785ae5372ff018a"
+      sha256: "6c5031daae12c7072b3a87eff98983076434b4889ef2a44384d0cae3f82372ba"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.5"
+    version: "2.4.6"
   freezed_annotation:
     dependency: transitive
     description:
@@ -1200,10 +1200,10 @@ packages:
     dependency: transitive
     description:
       name: source_gen
-      sha256: fc0da689e5302edb6177fdd964efcb7f58912f43c28c2047a808f5bfff643d16
+      sha256: "14658ba5f669685cd3d63701d01b31ea748310f7ab854e471962670abcf57832"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   source_helper:
     dependency: transitive
     description:
@@ -1296,18 +1296,18 @@ packages:
     dependency: "direct main"
     description:
       name: talker
-      sha256: "3cb5741a36032c64a16f06e715c7d74a65279f6e7e87b1f939ddfe027cb2fcfe"
+      sha256: "1e4351253560219859a8e757f5b8dbd266d5c289a50dd90d12da4f3041184392"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.7"
+    version: "3.2.0"
   talker_dio_logger:
     dependency: "direct main"
     description:
       name: talker_dio_logger
-      sha256: "734d4fdce0f2a53ebe0599611efd4168d8be1b19277f826d6b85d750199c9891"
+      sha256: c298f5e3c007db67320d58da57af3c3aa4eee51eef43e5e1cbb3fc8114007a1e
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.4"
+    version: "2.4.0"
   talker_logger:
     dependency: transitive
     description:
@@ -1321,7 +1321,7 @@ packages:
     description:
       path: "."
       ref: config-api
-      resolved-ref: e55b7a362ec8de956e5b37cb2732ed68de06c23e
+      resolved-ref: d07119d0603bfca34f3abef2236af7057384b23d
       url: "https://github.com/DangDDT/task_management_module.git"
     source: git
     version: "0.0.1"
@@ -1450,7 +1450,7 @@ packages:
     description:
       path: "."
       ref: config-api-login
-      resolved-ref: "2458dc634c949c87f4349641642842211738ae73"
+      resolved-ref: c707cbcacc464ac7f4f1124b8c906dae829c0735
       url: "https://github.com/DangDDT/user_module.git"
     source: git
     version: "0.0.1"
@@ -1540,7 +1540,7 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: f4fff5b909506d9885800ef4984b0eb9639fb2db
+      resolved-ref: cdcb58ddd669d6a46ec84130546b59cbbaadde54
       url: "https://github.com/DangDDT/wedding_service_module.git"
     source: git
     version: "0.0.1"
@@ -1573,7 +1573,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "75ecb9e4277fb24bfd68d9fc66ac1cd79b9ffa74"
+      resolved-ref: "15ecdaa52ea4e6a622542bf6c2fd9963f95efb0c"
       url: "https://github.com/DangDDT/wss_repository.git"
     source: git
     version: "0.0.1"

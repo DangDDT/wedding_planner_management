@@ -12,6 +12,13 @@ extension LocaleExtension on Locale {
 class SupportedLocales {
   static Locale get defaultLocale => vi;
 
+  static List<Locale> get supportedLocales => [
+        vi,
+        en,
+        ja,
+        zh,
+      ];
+
   static const Locale vi = Locale('vi', 'VN');
 
   static const Locale en = Locale('en', 'US');

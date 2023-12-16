@@ -6,10 +6,11 @@ class RevenuePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PartnerServiceDashboardPage(
-      viewConfig: PartnerServiceDashboardPageViewConfig(
-        isShowRecentTransactions: true,
-      ),
-    );
+    return const TransactionsPage();
+    // const PartnerServiceDashboardPage(
+    //   viewConfig: PartnerServiceDashboardPageViewConfig(
+    //     isShowRecentTransactions: true,
+    //   ),
+    // );
   }
 }

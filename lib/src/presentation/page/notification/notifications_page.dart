@@ -52,18 +52,8 @@ class NotificationsPage extends GetView<NotificationsPageController> {
                     description: 'Bạn chưa có thông báo nào',
                     reloadCallback: () => controller.pagingController.refresh(),
                   ),
-                  noMoreItemsIndicatorBuilder: (context) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const Divider(height: 12, indent: 32, endIndent: 32),
-                        Text(
-                          'Đã hết thông báo',
-                          style: context.textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                  ),
+                  noMoreItemsIndicatorBuilder: (context) =>
+                      const SizedBox.shrink(),
                 ),
                 separatorBuilder: _buildDateSeparator,
               ),

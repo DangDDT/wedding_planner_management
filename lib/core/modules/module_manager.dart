@@ -23,14 +23,18 @@ class ModuleManager {
       TaskManagementModuleManager.login(appUser: appUser),
       ServiceModuleManager.login(appUser: appUser),
       firebaseMessagingService.requestPermissions(),
+      firebaseMessagingService.subscribeToTopic(appUser.id),
     ]);
-    await firebaseMessagingService.subscribeToTopic(appUser.id);
   }
 
   static Future<void> logoutModules() async {
+    final firebaseMessagingService = Get.find<FirebaseMessagingService>();
+    final appUser = UserModuleManager.currentUser;
     await Future.wait([
       TaskManagementModuleManager.logout(),
       ServiceModuleManager.logout(),
+      if (appUser?.id != null)
+        firebaseMessagingService.unsubscribeFromTopic(appUser?.id),
     ]);
   }
 }

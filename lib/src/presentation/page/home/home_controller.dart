@@ -128,7 +128,7 @@ class PartnerHomeTab extends HomeTab {
             ),
             HomeTabItem(
               name: 'Doanh thu',
-              title: 'Thống kê doanh thu',
+              title: 'Lịch sử thanh toán',
               icon: Icons.monetization_on,
               page: const RevenuePage(),
             ),

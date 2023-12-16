@@ -52,4 +52,9 @@ class FirebaseMessagingRepository implements FirebaseMessagingService {
 
   @override
   AuthorizationStatus? get authorizationStatus => _authorizationStatus;
+
+  @override
+  Future<void> unsubscribeFromTopic(String topic) {
+    return _firebaseMessaging.unsubscribeFromTopic(topic);
+  }
 }

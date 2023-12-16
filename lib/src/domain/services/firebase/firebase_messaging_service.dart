@@ -9,4 +9,5 @@ abstract class FirebaseMessagingService {
   Future<void> requestPermissions();
   Future<String> get token;
   Future<void> subscribeToTopic(String topic);
+  Future<void> unsubscribeFromTopic(String topic);
 }
