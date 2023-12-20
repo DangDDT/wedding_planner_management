@@ -12,15 +12,13 @@ import 'package:wedding_planner_management/src/infrastructure/repositories/fireb
 import 'package:wss_repository/wss_repository.dart';
 
 import '../../environment.dart';
-import '../../src/domain/services/apis/base_api_service.dart';
 import '../../src/domain/services/firebase/firebase_crashlytic_service.dart';
 import '../../src/domain/services/firebase/firebase_messaging_service.dart';
 import '../../src/infrastructure/infrastructure.dart';
-import '../../src/infrastructure/repositories/base_api_repository.dart';
 import '../../src/infrastructure/repositories/firebase_crashlytic_repository.dart';
 import '../../src/infrastructure/repositories/firebase_messaging_repository.dart';
 import 'core_uri/core_uri.dart';
-import 'global_controller.dart';
+import '../../src/presentation/global/app_controller.dart';
 
 class GlobalBinding {
   static void setUpLocator({
@@ -33,7 +31,7 @@ class GlobalBinding {
       FirebaseMessagingRepository(),
       permanent: true,
     );
-    Get.put<FirebaseAuthenticationService>(
+    final auth = Get.put<FirebaseAuthenticationService>(
       FirebaseAuthenticationRepository(
         firebaseAuth: FirebaseAuth.instance,
         environment: environment,
@@ -70,11 +68,14 @@ class GlobalBinding {
     );
 
     WssRepository.init(
-      isShowDioLogger: true,
+      isShowDioLogger: false,
       authConfig: AuthConfig(
         accessToken: () => UserModuleManager.getAccessToken,
-        onRefreshTokenCallback: null,
-        onUnauthorizedCallback: null,
+        onRefreshTokenCallback: auth.refreshToken,
+        onUnauthorizedCallback: () async {
+          await UserModuleManager.logout();
+          await auth.signOut();
+        },
       ),
     );
 
@@ -82,15 +83,13 @@ class GlobalBinding {
       NotificationServiceImpl(),
     );
 
+    Get.put(AppController(), permanent: true);
+
     // Get.put<BaseApiClient>(
     //   BaseApiClient(),
     //   tag: BaseApiClient.tag,
     // );
 
     // Get.put<IsarService>(IsarManager(), tag: IsarService.tag);
-
-    Get.put<BaseApiService>(BaseApiRepository(), tag: BaseApiService.tag);
-
-    Get.put(AppController(), tag: AppController.tag);
   }
 }

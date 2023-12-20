@@ -74,6 +74,7 @@ class App extends StatelessWidget {
           else if (state.isAuthenticated && state.user != null) {
             Logger.logOK('[UserModule - Try Login case] User is authenticated');
             ModuleManager.loginModules(appUser: state.user!.user);
+            Get.find<AppController>().clearNotification();
           } else {
             Logger.logInfo('[UserModule - Other case]');
           }

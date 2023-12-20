@@ -17,10 +17,10 @@ class NotificationDataMapper
   }
 
   bool _checkIsRead(Notification data) {
-    if (data.isRead?.toLowerCase().contains('read') == true) {
-      return true;
-    } else {
+    if (data.isRead?.toLowerCase().contains('un') == true) {
       return false;
+    } else {
+      return true;
     }
   }
 }

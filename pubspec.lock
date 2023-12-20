@@ -1321,7 +1321,7 @@ packages:
     description:
       path: "."
       ref: config-api
-      resolved-ref: d07119d0603bfca34f3abef2236af7057384b23d
+      resolved-ref: c34bb45621987fd46a686349f6a3160d9c51ed1b
       url: "https://github.com/DangDDT/task_management_module.git"
     source: git
     version: "0.0.1"
@@ -1540,7 +1540,7 @@ packages:
     description:
       path: "."
       ref: dev
-      resolved-ref: cdcb58ddd669d6a46ec84130546b59cbbaadde54
+      resolved-ref: a65b4b2cfb5b06866312c648694ca9788ffa699d
       url: "https://github.com/DangDDT/wedding_service_module.git"
     source: git
     version: "0.0.1"

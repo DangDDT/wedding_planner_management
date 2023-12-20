@@ -6,6 +6,7 @@ import 'package:wedding_planner_management/src/domain/models/notification_data_m
 import 'package:wedding_planner_management/src/domain/models/state_data.dart';
 import 'package:wedding_planner_management/src/domain/services/firebase/firebase_messaging_service.dart';
 import 'package:wedding_planner_management/src/domain/services/interfaces/i_notifcation_service.dart';
+import 'package:wedding_planner_management/src/presentation/global/app_controller.dart';
 
 class NotificationsPageController extends GetxController {
   final firebaseMessagingService = Get.find<FirebaseMessagingService>();
@@ -15,7 +16,7 @@ class NotificationsPageController extends GetxController {
   PagingController<int, NotificationDataModel> get pagingController =>
       _pagingController;
   final permissionState = const StateData<bool>.loading().obs;
-
+  final appController = Get.find<AppController>();
   @override
   void onInit() {
     _checkPermission();
@@ -24,6 +25,15 @@ class NotificationsPageController extends GetxController {
     )..addPageRequestListener(_fetchPage);
 
     super.onInit();
+  }
+
+  Future<void> markAllAsRead() async {
+    final allNotificationUnread = appController.notifications;
+    final List<Future<void>> futures = [];
+    for (final notification in allNotificationUnread) {
+      futures.add(markAsRead(notification));
+    }
+    await Future.wait(futures);
   }
 
   Future<void> markAsRead(NotificationDataModel notification) async {

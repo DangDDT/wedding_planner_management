@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart' as dio_package;
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/core.dart';
-import '../../../../core/interceptors/log_interceptor.dart';
 import '../../../domain/domain.dart';
 import '../../../domain/mappers/api_mappers/base/base_error_response_mapper.dart';
 import '../../../domain/mappers/api_mappers/base/base_success_response_mapper.dart';
@@ -37,7 +35,7 @@ class DioClient {
           ),
         )..interceptors.addAll(
             [
-              if (kDebugMode) TalkerDioLoggerInterceptor(),
+              // if (kDebugMode) TalkerDioLoggerInterceptor(),
               RefreshTokenInterceptor(),
             ],
           );

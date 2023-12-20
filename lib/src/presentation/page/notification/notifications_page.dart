@@ -15,6 +15,23 @@ class NotificationsPage extends GetView<NotificationsPageController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Thông báo'),
+        actions: [
+          TextButton.icon(
+            onPressed: () async {
+              await controller.markAllAsRead();
+            },
+            icon: Icon(
+              Icons.check_circle_outline,
+              color: context.theme.colorScheme.primary,
+            ),
+            label: Text(
+              'Đã đọc tất cả',
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.theme.colorScheme.primary,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -164,16 +181,33 @@ class _NotificationWidget extends StatelessWidget {
   Widget _buildLeading(BuildContext context) {
     IconData iconData = Icons.notifications;
     Color color = context.theme.colorScheme.primary;
-    final content = notification.content.toLowerCase();
-    if (content.contains('đơn hàng') && content.contains('tạo')) {
+    final content = notification.content.toLowerCase().trim();
+    if (content.contains('đơn hàng') &&
+        (content.contains('tạo') || content.contains('mới'))) {
       iconData = Icons.add_shopping_cart_outlined;
       color = Colors.green;
     } else if (content.contains('đơn hàng') && content.contains('hủy')) {
       iconData = Icons.remove_shopping_cart_outlined;
       color = Colors.red;
-    } else if (content.contains('task') && content.contains('tạo')) {
+    } else if ((content.contains('công việc') || content.contains('task')) &&
+        (content.contains('tạo') || content.contains('mới'))) {
       iconData = Icons.add_task_outlined;
       color = Colors.green;
+    } else if ((content.contains('công việc') || content.contains('task')) &&
+        (content.contains('hủy') || content.contains('huỷ'))) {
+      iconData = Icons.remove_circle_outline;
+      color = Colors.red;
+    } else if (content.contains('thanh toán') ||
+        content.contains('thành toán') ||
+        content.contains('thanh toán.')) {
+      iconData = Icons.monetization_on_outlined;
+      color = Colors.green;
+    } else if (content.contains('dịch vụ') && content.contains('duyệt')) {
+      iconData = Icons.check_circle_outline;
+      color = Colors.green;
+    } else if (content.contains('dịch vụ') && content.contains('từ chối')) {
+      iconData = Icons.cancel_outlined;
+      color = Colors.red;
     }
     return Container(
       width: 48,

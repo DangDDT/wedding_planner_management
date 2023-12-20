@@ -10,7 +10,7 @@ export 'constants/ui_constant.dart';
 export 'gens/assets.dart';
 export 'initialize/core_uri/core_uri.dart';
 export 'initialize/global_binding.dart';
-export 'initialize/global_controller.dart';
+export '../src/presentation/global/app_controller.dart';
 export 'initialize/style/theme.dart';
 export 'interceptors/refresh_token_interceptor.dart';
 export 'modules/module_manager.dart';

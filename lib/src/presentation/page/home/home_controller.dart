@@ -5,6 +5,7 @@ import 'package:wedding_planner_management/core/core.dart';
 import 'package:wedding_planner_management/src/presentation/page/dashboard/partner/partner_dashboard_page.dart';
 import 'package:wedding_planner_management/src/presentation/page/profile/profile_page.dart';
 import 'package:wedding_planner_management/src/presentation/page/revenue/revenue_page.dart';
+import 'package:wedding_planner_management/src/presentation/widgets/notification_count_badge_wrapper.dart';
 import 'package:wedding_service_module/wedding_service_module.dart';
 
 import '../dashboard/staff/staff_dashboard_page.dart';
@@ -66,11 +67,18 @@ class StaffHomeTab extends HomeTab {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed(RouterConstants.notifications);
+                      onTap: () async {
+                        await Get.toNamed(RouterConstants.notifications);
+                        await Get.find<AppController>()
+                            .getCountUnreadNotification();
                       },
-                      child: const Icon(
-                        Icons.notifications,
+                      child: const NotificationCountBadgeWrapper(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.notifications,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -104,11 +112,18 @@ class PartnerHomeTab extends HomeTab {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: GestureDetector(
-                    onTap: () {
-                      Get.toNamed(RouterConstants.notifications);
+                    onTap: () async {
+                      await Get.toNamed(RouterConstants.notifications);
+                      await Get.find<AppController>()
+                          .getCountUnreadNotification();
                     },
-                    child: const Icon(
-                      Icons.notifications,
+                    child: const NotificationCountBadgeWrapper(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.notifications,
+                        ),
+                      ),
                     ),
                   ),
                 ),

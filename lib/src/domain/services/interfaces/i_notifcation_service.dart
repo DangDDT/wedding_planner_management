@@ -2,8 +2,8 @@ import 'package:wedding_planner_management/src/domain/models/notification_data_m
 
 abstract interface class INotificationService {
   Future<List<NotificationDataModel>> getNotifications({
-    required int page,
-    required int limit,
+    required int? page,
+    required int? limit,
     required String userId,
   });
 

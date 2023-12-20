@@ -8,8 +8,8 @@ class NotificationServiceImpl implements INotificationService {
   final repo = Get.find<INotificationRepository>();
   @override
   Future<List<NotificationDataModel>> getNotifications({
-    required int page,
-    required int limit,
+    required int? page,
+    required int? limit,
     required String userId,
   }) async {
     final data = await repo.getNotifications(
